@@ -19,8 +19,6 @@ posts = [
         'author': 'Danilo',
         'created': datetime(2022,7,26)
     },
-
-
 ]
 
 @app.route('/') #Cria uma rota para a aplicação (raiz da aplicação)
