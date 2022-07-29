@@ -6,7 +6,7 @@
 from flask import Flask, render_template, redirect, url_for, request, flash
 from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager, UserMixin, current_user
+from flask_login import LoginManager, UserMixin, current_user, logout_user, login_user
 from werkzeug.security import check_password_hash, generate_password_hash
 from sqlalchemy.exc import IntegrityError
 
@@ -73,4 +73,21 @@ def register():
 
 @app.route('/login')
 def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        user = User.query.filter_by(username=username).first()
+        if user is None or not user.check_password(password):
+             flash("Incorret Username or Password")
+             return redirect(url_for('login'))
+        login_user(user)
+        return redirect(url_for('login.html'))
+
     return render_template("login.html")
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('index'))
