@@ -10,7 +10,7 @@
 <form method="POST">
     <label for="title"> Title: </label>
     <input id="title" name="title" required value="{{ request.form['title'] }}">
-    <label for="body">Body: </label>
+    <label for="body">Digite um post: </label>
     <textarea id="body" name="body">{{ request.form['body'] }}</textarea>
     <input type="submit" value="Post">
 </form>
