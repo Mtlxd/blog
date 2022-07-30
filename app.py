@@ -107,3 +107,4 @@ def create():
         except IntegrityError:
             flash("Error on create Post, try again later")
     return render_template('create.html')
+    
